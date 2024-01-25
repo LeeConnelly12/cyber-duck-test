@@ -11,11 +11,11 @@ class Sale extends Model
 
     public function formattedUnitCost()
     {
-        return '£' . $this->unit_cost / 100;
+        return '£' . number_format($this->unit_cost / 100, 2);
     }
 
     public function formattedSellingPrice()
     {
-        return '£' . $this->selling_price / 100;
+        return '£' . number_format($this->selling_price / 100, 2);
     }
 }
