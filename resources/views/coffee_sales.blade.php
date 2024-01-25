@@ -13,8 +13,8 @@
                         action="{{ route('coffee.sales.store') }}"
                         method="POST"
                         x-data="{
-                            quantity: 1,
-                            unitCost: 0,
+                            quantity: {{ old('quantity', 1) }},
+                            unitCost: {{ old('unit_cost', 0) }},
                             sellingPrice() {
                                 if (!this.unitCost) {
                                     return 'N/A'
