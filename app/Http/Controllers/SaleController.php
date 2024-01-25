@@ -27,7 +27,7 @@ class SaleController extends Controller
     {
         $request->validate([
             'quantity' => ['required', 'integer', 'min:1', 'max:100'],
-            'unit_cost' => ['required', 'integer', 'min:0', 'max:1000'],
+            'unit_cost' => ['required', 'numeric', 'min:0', 'max:1000', 'decimal:0,2'],
         ]);
 
         Sale::query()->create([

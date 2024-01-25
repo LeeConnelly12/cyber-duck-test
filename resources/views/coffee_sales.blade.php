@@ -42,7 +42,7 @@
 
                         <div class="mt-2">
                             <label for="unit_cost">Unit Cost (£)</label>
-                            <input class="mt-1" type="number" x-model="unitCost" name="unit_cost" id="unit_cost" min="0">
+                            <input class="mt-1" type="number" x-model="unitCost" name="unit_cost" id="unit_cost" min="0" step=".01">
                             @error('unit_cost')
                                 <p class="text-red-500 mt-1">{{ $message }}</p>
                             @enderror
