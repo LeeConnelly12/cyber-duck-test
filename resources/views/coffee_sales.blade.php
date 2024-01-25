@@ -51,9 +51,6 @@
                         <div class="mt-2">
                             <label for="unit_cost">Selling Price</label>
                             <p x-text="sellingPrice()"></p>
-                            @error('unit_cost')
-                                <p class="text-red-500 mt-1">{{ $message }}</p>
-                            @enderror
                         </div>
 
                         <button type="submit" class="mt-2">Record Sale</button>
