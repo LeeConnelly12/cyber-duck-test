@@ -55,6 +55,47 @@
 
                         <button type="submit" class="mt-2">Record Sale</button>
                     </form>
+
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-2">Previous sales</h2>
+
+                    <div class="relative overflow-x-auto mt-2">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Quantity
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Unit Cost
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Selling Price
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @forelse ($sales as $sale)
+                                    <tr class="bg-white border-b">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                            {{ $sale->quantity }}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            {{ $sale->unit_cost }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $sale->formattedSellingPrice() }}
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td>No previous sales</td>
+                                    </tr>
+                                @endforelse
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
