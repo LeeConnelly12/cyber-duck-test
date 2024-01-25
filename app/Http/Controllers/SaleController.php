@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CalculateCoffeePrice;
+use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,11 @@ class SaleController extends Controller
     public function index()
     {
         return view('coffee_sales', [
+            'products' => Product::query()
+                ->select('id', 'name', 'profit_margin')
+                ->get(),
             'sales' => Sale::query()
-                ->select('quantity', 'unit_cost', 'selling_price', 'created_at')
+                ->with('product:id,name')
                 ->latest()
                 ->get(),
         ]);
@@ -27,14 +31,19 @@ class SaleController extends Controller
     public function store(Request $request, CalculateCoffeePrice $calculateCoffeePriceAction)
     {
         $request->validate([
+            'product_id' => ['required', 'exists:products,id'],
             'quantity' => ['required', 'integer', 'min:1', 'max:100'],
             'unit_cost' => ['required', 'numeric', 'min:0', 'max:1000', 'decimal:0,2'],
         ]);
 
+        $product = Product::find($request->product_id);
+
         Sale::query()->create([
+            'product_id' => $request->product_id,
             'quantity' => $request->quantity,
             'unit_cost' => $request->unit_cost * 100,
             'selling_price' => $calculateCoffeePriceAction->execute(
+                profitMargin: $product->profit_margin,
                 quantity: $request->quantity,
                 unitCost: $request->unit_cost * 100
             )

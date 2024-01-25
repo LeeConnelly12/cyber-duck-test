@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Product;
 use App\Models\Sale;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,8 +28,13 @@ class SaleControllerTest extends TestCase
     {
         $user = User::factory()->create();
 
+        $product = Product::factory()->create([
+            'profit_margin' => 0.25,
+        ]);
+
         $this->actingAs($user)
             ->post('/sales', [
+                'product_id' => $product->id,
                 'quantity' => 1,
                 'unit_cost' => 10,
             ])->assertRedirect();
