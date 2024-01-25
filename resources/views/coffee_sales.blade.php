@@ -84,7 +84,7 @@
                                             {{ $sale->quantity }}
                                         </th>
                                         <td class="px-6 py-4">
-                                            {{ $sale->unit_cost }}
+                                            {{ $sale->formattedUnitCost() }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $sale->formattedSellingPrice() }}

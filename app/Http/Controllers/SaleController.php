@@ -33,7 +33,7 @@ class SaleController extends Controller
 
         Sale::query()->create([
             'quantity' => $request->quantity,
-            'unit_cost' => $request->unit_cost,
+            'unit_cost' => $request->unit_cost * 100,
             'selling_price' => $calculateCoffeePriceAction->execute(
                 quantity: $request->quantity,
                 unitCost: $request->unit_cost * 100
