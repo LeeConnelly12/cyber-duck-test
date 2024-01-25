@@ -34,7 +34,7 @@
 
                         <div>
                             <label for="quantity">Quantity</label>
-                            <input class="mt-1" type="number" x-model="quantity" name="quantity" id="quantity" min="1">
+                            <input class="mt-1" type="number" x-model="quantity" name="quantity" id="quantity" min="1" required>
                             @error('quantity')
                                 <p class="text-red-500 mt-1">{{ $message }}</p>
                             @enderror
@@ -42,7 +42,7 @@
 
                         <div class="mt-2">
                             <label for="unit_cost">Unit Cost (£)</label>
-                            <input class="mt-1" type="number" x-model="unitCost" name="unit_cost" id="unit_cost" min="0" step=".01">
+                            <input class="mt-1" type="number" x-model="unitCost" name="unit_cost" id="unit_cost" min="0" step=".01" required>
                             @error('unit_cost')
                                 <p class="text-red-500 mt-1">{{ $message }}</p>
                             @enderror
