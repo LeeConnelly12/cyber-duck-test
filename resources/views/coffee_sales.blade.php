@@ -71,6 +71,9 @@
                                     <th scope="col" class="px-6 py-3">
                                         Selling Price
                                     </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Sold at
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,6 +88,9 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $sale->formattedSellingPrice() }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $sale->created_at->format('Y-m-d H:i') }}
                                         </td>
                                     </tr>
                                 @empty

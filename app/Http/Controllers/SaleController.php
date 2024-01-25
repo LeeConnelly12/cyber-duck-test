@@ -15,7 +15,8 @@ class SaleController extends Controller
     {
         return view('coffee_sales', [
             'sales' => Sale::query()
-                ->select('quantity', 'unit_cost', 'selling_price')
+                ->select('quantity', 'unit_cost', 'selling_price', 'created_at')
+                ->latest()
                 ->get(),
         ]);
     }
