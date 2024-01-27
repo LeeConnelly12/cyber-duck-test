@@ -1,26 +1,86 @@
 # LOCAL DEVELOPMENT
-## Requirements:
-Note: This local setup was aimed at macOS, if you need to tweak it feel free to just point us to the changed configuration.
 
-1. Have PHP installed on version 8.1 and composer 2
-2. You can use `php artisan serve` but feel free to setup any local setup: Sail, valet or any local solution (MAMP).
-3. Have node installed in the latest version
-   1. We suggest [n package](https://www.npmjs.com/package/n) to manage the node version (`npm install -g n && n 21`)
+## Requirements
 
-## Commands to setup
-We did not automate it to keep it generic and suggest:
+This project uses [Laravel Sail](https://laravel.com/docs/10.x/sail) for local development and requires [Docker](https://docs.docker.com/get-docker) to be installed.
 
-From the root of the project:
-```bash
-composer install 
-cp .env.example .env
-php artisan key:generate
-sudo n 21
-npm install && npm run dev
-touch database/database.sqlite
-php artisan migrate:fresh --seed
-php artisan serve
+## Setup
+
+Clone the repo
+
+```
+git clone git@github.com:LeeConnelly12/cyber-duck-test.git
 ```
 
-## Database access
-The default is using sqlite lite, so feel free to connect to it
+Change into the directory
+
+```
+cd cyber-duck-test
+```
+
+Install composer dependencies
+
+```
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php82-composer:latest \
+    composer install --ignore-platform-reqs
+```
+
+Copy the .env example file
+
+```
+cp .env.example .env
+```
+
+Set sail alias
+
+```
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+```
+
+Start the containers
+
+```
+sail up -d
+```
+
+Set the app key in the .env file
+
+```
+sail artisan key:generate
+```
+
+Run migrations and seeders
+
+```
+sail artisan migrate --seed
+```
+
+Install NPM depenedencies
+
+```
+sail npm install
+```
+
+Run dev server
+
+```
+sail npm run watch
+```
+
+You should now be able to view the project in your browser on `http://localhost`
+
+Run tests
+
+```
+sail test
+```
+
+Stop containers and remove database
+
+```
+sail down -v
+```
