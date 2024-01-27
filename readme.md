@@ -1,5 +1,8 @@
 # Cyber-Duck Laravel task
 
+![image](https://github.com/LeeConnelly12/cyber-duck-test/assets/25698647/cd49231c-f084-4f01-8149-e1e625a64b72)
+
+
 Documentation should be kept in the `docs` folder
 
 ## TABLE OF CONTENTS
